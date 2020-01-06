@@ -40,6 +40,7 @@ async function getUsers(req, res) {
     handleError(res, err);
   }
 }
+
 //delete a user
 async function deleteUser(req, res) {
   try {
@@ -70,6 +71,7 @@ async function updateUser(req, res) {
   }
 }
 
+//get a single user
 async function getUser(req, res) {
   try {
     const userSnapshot = await db
@@ -88,6 +90,7 @@ async function getUser(req, res) {
   }
 }
 
+//handling front end server errors
 function handleError(res, err) {
   console.error(err);
   return res.status(500).send("server error");
