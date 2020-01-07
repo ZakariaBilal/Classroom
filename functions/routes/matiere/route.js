@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const controller = require("./controller");
+const { checkIfAuthenticated, checkIfHasAdmin, checkIfHasProf, checkIfHasStudent, checkIfHasChef, checkIfHasDelegue} = require("../../middleware/auth");
+
 
 router.get("/", controller.getMatieres);
 router.get("/:id", controller.getMatiere);
