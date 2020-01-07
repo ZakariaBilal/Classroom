@@ -4,6 +4,9 @@ const { db, admin } = require("../../config/config");
 async function addUser(req, res) {
   try {
     const { name, email, phoneNumber, password, role } = req.body;
+    if (!role) {
+      let role = "student";
+    }
     const authUser = await admin.auth().createUser({
       displayName: name,
       email,

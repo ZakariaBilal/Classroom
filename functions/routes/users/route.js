@@ -1,11 +1,17 @@
 const router = require("express").Router();
 const controller = require("./controller");
-const { checkIfAuthenticated, checkIfHasAdmin, checkIfHasProf, checkIfHasStudent, checkIfHasChef, checkIfHasDelegue} = require("../../middleware/auth");
+const {
+  checkIfAuthenticated,
+  checkIfHasProf,
+  checkIfHasStudent,
+  checkIfHasChef,
+  checkIfHasDelegue
+} = require("../../middleware/auth");
 
-router.get("/", checkIfHasAdmin, checkIfHasChef, controller.getUsers);
-router.get("/:id", checkIfHasAdmin, checkIfHasChef, controller.getUser);
-router.post("/", checkIfHasAdmin, checkIfHasChef, controller.addUser)
-router.put("/:id", checkIfHasAdmin, checkIfHasChef, controller.updateUser);
-router.delete("/:id", checkIfHasAdmin, checkIfHasChef, controller.deleteUser);
+router.get("/", controller.getUsers);
+router.get("/:id", controller.getUser);
+router.post("/", controller.addUser);
+router.put("/:id", controller.updateUser);
+router.delete("/:id", controller.deleteUser);
 
 module.exports = router;
