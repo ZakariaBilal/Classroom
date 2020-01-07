@@ -1,11 +1,11 @@
 const { db, admin } = require("../../config/config");
 
-//add a user
+//add a matiere
 async function addMatiere(req, res) {
   try {
-    const { libelle, prof, chi7aja } = req.body;
+    const { name, mod, prof } = req.body;
 
-    const matiere = { libelle, prof, chi7aja };
+    const matiere = { name, mod, prof };
     await db.collection("Matieres").set(matiere);
     return res.send("matiere created");
   } catch (err) {
@@ -13,7 +13,7 @@ async function addMatiere(req, res) {
   }
 }
 
-//get all users
+//get all 
 async function getMatieres(req, res) {
   try {
     const matiereSnapshot = await db.collection("Matieres").get();
@@ -31,7 +31,7 @@ async function getMatieres(req, res) {
   }
 }
 
-//delete a user
+//delete a matiere
 async function deleteMatiere(req, res) {
   try {
     let deleteDoc = await db
@@ -44,13 +44,13 @@ async function deleteMatiere(req, res) {
   }
 }
 
-//update a user
+//update a matiere
 async function updateMatiere(req, res) {
   try {
     let matiereFields = {};
     if (name) matiereFields.name = req.body.name;
-    if (email) matiereFields.email = req.body.email;
-    if (tel) matiereFields.tel = req.body.email;
+    if (mod) matiereFields.mod = req.body.mod;
+    if (prof) matiereFields.prof = req.body.prof;
     let updateDoc = await db
       .collection("Matieres")
       .doc(req.params.id)
@@ -61,7 +61,7 @@ async function updateMatiere(req, res) {
   }
 }
 
-//get a single user
+//get a single matiere
 async function getMatiere(req, res) {
   try {
     const matiereSnapshot = await db

@@ -45,4 +45,46 @@ const checkIfHasAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { checkIfAuthenticated, checkIfHasAdmin };
+//check if the current user is prof if prof it goes to next else it returns a 403 status
+const checkIfHasProf = (req, res, next) => {
+  const { role, uid, email } = req.user;
+  if (role === "prof") {
+    return next();
+  } else {
+    res.status(403).send("Unauthorized");
+  }
+};
+
+//check if the current user is student if student it goes to next else it returns a 403 status
+const checkIfHasStudent = (req, res, next) => {
+  const { role, uid, email } = req.user;
+  if (role === "student") {
+    return next();
+  } else {
+    res.status(403).send("Unauthorized");
+  }
+};
+
+//check if the current user is chef if chef it goes to next else it returns a 403 status
+const checkIfHasChef = (req, res, next) => {
+  const { role, uid, email } = req.user;
+  if (role === "chef") {
+    return next();
+  } else {
+    res.status(403).send("Unauthorized");
+  }
+};
+
+//check if the current user is delegue if delegue it goes to next else it returns a 403 status
+const checkIfHasDelegue = (req, res, next) => {
+  const { role, uid, email } = req.user;
+  if (role === "delegue") {
+    return next();
+  } else {
+    res.status(403).send("Unauthorized");
+  }
+};
+
+module.exports = { checkIfAuthenticated, checkIfHasAdmin, checkIfHasProf, checkIfHasStudent, checkIfHasChef, checkIfHasDelegue };
+
+
