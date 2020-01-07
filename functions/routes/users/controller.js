@@ -1,4 +1,5 @@
 const { db, admin } = require("../../config/config");
+const uuid = require("uuid/v1");
 
 //add a user
 async function addUser(req, res) {
@@ -7,7 +8,9 @@ async function addUser(req, res) {
     if (!role) {
       let role = "student";
     }
+    let uid = uuid();
     const authUser = await admin.auth().createUser({
+      uid,
       displayName: name,
       email,
       password
@@ -15,10 +18,10 @@ async function addUser(req, res) {
     await admin.auth().setCustomUserClaims(authUser, { role });
 
     const user = { name, email, phoneNumber };
-
+    console.log(authUser);
     await db
       .collection("Users")
-      .doc(authUser.uid)
+      .doc(uid)
       .set(user);
     return res.send("user created");
   } catch (err) {
